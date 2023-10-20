@@ -6,7 +6,7 @@ from hypercorn.config import Config
 from .app import app
 
 config = Config()
-config.bind = ["0.0.0.0:5000"]
+config.bind = ["0.0.0.0:6969"]
 config.loglevel = "INFO"
 config.accesslog = "-"
 config.errorlog = "-"
