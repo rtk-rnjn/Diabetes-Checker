@@ -1,0 +1,6 @@
+hypercorn
+numpy
+pandas
+Quart
+scikit-learn
+python-dotenv

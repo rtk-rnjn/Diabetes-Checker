@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <title>Run-D</title>
+        <style>
+            body {
+                background-image: linear-gradient(to right top, #D91B23, #597edc);
+                height: 120vh;
+                font-family: 'Courier New', Courier, monospace;
+                color: #000000;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="age" id="age" required placeholder="In years">
+                            <label class="form-check-label" for="age">Age [yrs]</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="weight" id="weight" required placeholder="In kilo">
+                            <label class="form-check-label" for="weight">Weight [kg]</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="height" id="height" required placeholder="In centimeters">
+                            <label class="form-check-label" for="height">Height [cm]</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="hb1acLevel" id="hb1acLevel" required placeholder="0.0">
+                            <label class="form-check-label" for="hb1acLevel">HB1AC Level [%]</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="bloodGlucoseLevel" name="bloodGlucoseLevel" required placeholder="0.0">
+                            <label class="form-check-label" for="bloodGlucoseLevel">Blood Glucose Level [%]</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" checked>
+                                <label class="form-check-label" for="genderMale"> Male </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+                                <label class="form-check-label" for="genderFemale"> Female </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="rtypes" class="">Hypertension</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="hypertension" id="hyperTensionYes" value="1" checked>
+                                <label class="form-check-label" for="hyperTensionYes"> Yes </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="hypertension" id="hypertensionNo" value="0">
+                                <label class="form-check-label" for="hypertensionNo"> No </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="rtypes" class="">Heart Disease</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="heartDisease" id="YES" value="1" checked>
+                                <label class="form-check-label" for="hyperTensionYes"> Yes </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="heartDisease" id="NO" value="0">
+                                <label class="form-check-label" for="hypertensionNo"> No </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="smoking">Smoking</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingNever" value="never" checked>
+                            <label class="form-check-label" for="smokingNever"> Never </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingCurrent" value="current">
+                            <label class="form-check-label" for="smokingCurrent"> Current </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingFormer" value="former">
+                            <label class="form-check-label" for="smokingFormer"> Former </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Are you FUCKED yet?</button>
+                </div>
+            </form>
+            <div class="alert alert-{{ cls }} mt-4 h2 text-center" role="alert">
+                {{ result }}
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    </body>
+</html>
