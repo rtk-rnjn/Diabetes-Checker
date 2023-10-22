@@ -12,7 +12,7 @@ async def req():
         return await render_template("index.html")
 
     data = get_data(request)
-    r = await ml.predict(**data)
+    r = await ml.try_cache(**data) or await ml.predict(**data)
 
     if r:
         temp = "You are at risk of diabetes"

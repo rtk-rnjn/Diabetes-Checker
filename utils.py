@@ -5,6 +5,9 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial, wraps
 from typing import TYPE_CHECKING, Any, Callable, Literal, TypedDict
 
+import aiofiles
+import aiosqlite
+
 if TYPE_CHECKING:
     from quart import Request
 
@@ -94,3 +97,83 @@ class ToAsync:
             return await loop.run_in_executor(self.executor, func)
 
         return wrapper
+        
+
+class Cache:
+    def __init__(self, db_name: str) -> None:
+        self.db_name = db_name
+
+    async def connect(self) -> None:
+        self.db = await aiosqlite.connect(self.db_name)
+
+    async def close(self) -> None:
+        if hasattr(self, "db"):
+            await self.db.close()
+
+    async def init(self) -> None:
+        if not hasattr(self, "db"):
+            await self.connect()
+
+        async with aiofiles.open("sql.sql", "r") as f:
+            sql = await f.read()
+
+        await self.db.executescript(sql)
+        await self.db.commit()
+
+    async def __aenter__(self) -> aiosqlite.Connection:
+        self.db = await aiosqlite.connect(self.db_name)
+        return self.db
+
+    async def __aexit__(self, *args) -> None:
+        await self.db.close()
+
+    async def execute(self, *args, **kwargs) -> aiosqlite.Cursor:
+        if not hasattr(self, "db"):
+            await self.connect()
+
+        r = await self.db.execute(*args, **kwargs)
+        await self.db.commit()
+
+        return r
+
+    async def executemany(self, *args, **kwargs) -> aiosqlite.Cursor:
+        if not hasattr(self, "db"):
+            await self.connect()
+
+        r = await self.db.executemany(*args, **kwargs)
+        await self.db.commit()
+
+        return r
+
+    async def get_by_id(self, id: int) -> tuple:
+        query = """SELECT * FROM patients WHERE id = ?"""
+
+        raw = await self.execute(query, (id,))
+        return await raw.fetchone()
+
+    async def is_diabetic(self, **kwargs: str) -> int:
+        print(kwargs)
+        _capture = ["Male", "Female", "never", "former", "current"]
+        def parse_v(v):
+            if str(v).isdigit():
+                return v
+            if v in _capture:
+                return f"'{v}'"
+            
+            return round(float(v), 1)
+
+        query = """SELECT * FROM patients WHERE """ + " AND ".join(
+            f"{k} = {parse_v(v)}" for k, v in kwargs.items()
+        )
+        print(query)
+
+        raw = await self.execute(query)
+        if not raw:
+            return -1
+
+        res = await raw.fetchone()
+
+        if not res:
+            return -1
+        
+        return res[0]

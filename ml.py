@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
-from utils import MISSING, ToAsync
+from utils import MISSING, Cache, ToAsync
 
 Patient = namedtuple(
     "Patient",
@@ -36,6 +36,7 @@ class ML:
     def __init__(self, file_name: str) -> None:
         self.file_name = file_name
         self.data = pd.read_csv(self.file_name)
+        self.cache = Cache("cached.sqlite")
 
     def init(self) -> None:
         self._x = self.data.iloc[:, :-1]
@@ -78,6 +79,10 @@ class ML:
 
         self._classifier = classifier
         return self._classifier
+
+    async def try_cache(self, **kwargs) -> None:
+        r = await self.cache.is_diabetic(**kwargs)
+        return r if r != -1 else None
 
     @ToAsync()
     def predict(

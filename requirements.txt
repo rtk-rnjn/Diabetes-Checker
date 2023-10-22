@@ -4,3 +4,5 @@ pandas
 Quart
 scikit-learn
 python-dotenv
+tabulate
+aiosqlite
