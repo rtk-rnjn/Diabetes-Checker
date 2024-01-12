@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="feel.css">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="icon" href="diabetes_3.png">
-        <title>Check-Up</title>
+        <title>Run-D</title>
         <style>
             body {
-                width: 100%;
-                background-color: #0093E9;
-                background-color: #D9AFD9;
-                background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
-
+                background-image: linear-gradient(to right top, #D91B23, #597edc);
                 height: 120vh;
                 font-family: 'Courier New', Courier, monospace;
                 color: #000000;
-                font-weight: 540;
             }
 
         </style>
@@ -25,43 +18,44 @@
     <body>
         <div class="container">
             <form>
-                <div>
-                    <h1 class = "heading"> Diabetes Check-Up </h1>
-
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="age" id="age" required placeholder="In years">
+                            <label class="form-check-label" for="age">Age [yrs]</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="weight" id="weight" required placeholder="In kilo">
+                            <label class="form-check-label" for="weight">Weight [kg]</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="height" id="height" required placeholder="In centimeters">
+                            <label class="form-check-label" for="height">Height [cm]</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col">
                         <div class="form-floating">
-                            <input type="number" class="form-control" style="width: 100%;" name="weight" id="weight" required placeholder="In kilo">
-                            <label class="form-check-label" style="width: 100%;" for="weight">Weight [kg]</label>
+                            <input type="number" class="form-control" name="hb1acLevel" id="hb1acLevel" required placeholder="0.0">
+                            <label class="form-check-label" for="hb1acLevel">HB1AC Level [%]</label>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input type="number" class="form-control" style="width: 100%;" name="height" id="height" required placeholder="In centimeters">
-                            <label class="form-check-label" style="width: 100%;" for="height">Height [cm]</label>
+                            <input type="number" class="form-control" id="bloodGlucoseLevel" name="bloodGlucoseLevel" required placeholder="0.0">
+                            <label class="form-check-label" for="bloodGlucoseLevel">Blood Glucose Level [%]</label>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" style="width: 100%;" name="hb1acLevel" id="hb1acLevel" required placeholder="0.0">
-                            <label class="form-check-label" style="width: 100%;" for="hb1acLevel">HB1AC Level [%]</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" style="width: 100%;" id="bloodGlucoseLevel" name="bloodGlucoseLevel" required placeholder="0.0">
-                            <label class="form-check-label" style="width: 100%;" for="bloodGlucoseLevel">Blood Glucose Level [%]</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class ="group"></div>
                     <div class="col">
                         <div class="form-group">
-                            <div class ="box"><label for="gender" style="font-weight: bold; font-size: 1.5rem; padding-top: 40px; width: 100;padding-bottom: 10px">Gender</label></div>
+                            <label for="gender">Gender</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" checked>
                                 <label class="form-check-label" for="genderMale"> Male </label>
@@ -74,7 +68,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <div class ="box"><label for="rtypes" style="font-weight: bold; font-size: 1.5rem; padding-top: 40px; width: 100;padding-bottom: 10px;">Hypertension</label></div>
+                            <label for="rtypes" class="">Hypertension</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="hypertension" id="hyperTensionYes" value="1" checked>
                                 <label class="form-check-label" for="hyperTensionYes"> Yes </label>
@@ -87,39 +81,38 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <div class ="box"><label for="rtypes" style="font-weight: bold; font-size: 1.5rem; padding-top: 40px; width: 100;padding-bottom: 10px">Heart Disease</label></div>
-                            <div class = "form-check">
-                                <input class="form-check-input" type="radio" name="heartDisease" id="heartDiseaseYes" value="1" checked>
-                                <label class="form-check-label" for="heartDiseaseYes"> Yes </label>
-                            </div>    
-                            <div class = "form-check">
-                                <input class="form-check-input" type="radio" name="heartDisease" id="heartDiseaseNo" value="0">
-                                <label class="form-check-label" for="heartDiseaseNo"> No </label>
-                            </div>    
+                            <label for="rtypes" class="">Heart Disease</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="heartDisease" id="YES" value="1" checked>
+                                <label class="form-check-label" for="hyperTensionYes"> Yes </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="heartDisease" id="NO" value="0">
+                                <label class="form-check-label" for="hypertensionNo"> No </label>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <div class = "box"><label for="smoking" style="font-weight: bold; font-size: 1.5rem; padding-top: 40px; width: 100%;padding-bottom: 10px">Smoking</label></div>
-                        
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="smoking" id="smokingNever" value="never" checked>
-                                <label class="form-check-label" for="smokingNever"> Never </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="smoking" id="smokingCurrent" value="current">
-                                <label class="form-check-label" for="smokingCurrent"> Current </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="smoking" id="smokingFormer" value="former">
-                                <label class="form-check-label" for="smokingFormer"> Former </label>
-                            </div>
+                            <label for="smoking">Smoking</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingNever" value="never" checked>
+                            <label class="form-check-label" for="smokingNever"> Never </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingCurrent" value="current">
+                            <label class="form-check-label" for="smokingCurrent"> Current </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="smoking" id="smokingFormer" value="former">
+                            <label class="form-check-label" for="smokingFormer"> Former </label>
                         </div>
                     </div>
-                    <div class = "sub"><button type="submit" class="submit" style="width: 150px; height: 30px ;margin-right:35px;margin-top:20px">SUBMIT</button></div>
+                    <button type="submit" class="btn btn-primary">SUBMIT</button>
                 </div>
             </form>
-            <div class="alert alert-{{ cls }} mt-4 h2 text-center" style="width: 100% ;" role="alert">
+            <div class="alert alert-{{ cls }} mt-4 h2 text-center" role="alert">
                 {{ result }}
             </div>
         </div>
