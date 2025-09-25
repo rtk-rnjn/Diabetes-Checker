@@ -1,122 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <title>Run-D</title>
-        <style>
-            body {
-                background-image: linear-gradient(to right top, #D91B23, #597edc);
-                height: 120vh;
-                font-family: 'Courier New', Courier, monospace;
-                color: #000000;
-            }
+<html lang="en" x-data="{ gender: 'Male', hypertension: '1', heartDisease: '1', smoking: 'never' }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Checker</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: linear-gradient(to right top, #D91B23, #597edc);
+            height: 100vh;
+            overflow: hidden; /* prevent scrolling */
+            font-family: 'Courier New', Courier, monospace;
+            color: #000000;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-5xl bg-white/90 backdrop-blur-lg shadow-2xl rounded-2xl p-8">
+        
+        <!-- Heading -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-indigo-700 mb-6">
+            🩺 Diabetes Checker
+        </h1>
 
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <form>
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" name="age" id="age" required placeholder="In years">
-                            <label class="form-check-label" for="age">Age [yrs]</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" name="weight" id="weight" required placeholder="In kilo">
-                            <label class="form-check-label" for="weight">Weight [kg]</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" name="height" id="height" required placeholder="In centimeters">
-                            <label class="form-check-label" for="height">Height [cm]</label>
-                        </div>
+        <form method="POST" class="space-y-6">
+            <!-- Row 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="age" class="block text-sm font-semibold text-gray-700">Age [yrs]</label>
+                    <input type="number" name="age" id="age" required placeholder="In years"
+                        class="mt-2 w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3">
+                </div>
+                <div>
+                    <label for="weight" class="block text-sm font-semibold text-gray-700">Weight [kg]</label>
+                    <input type="number" name="weight" id="weight" required placeholder="In kilo"
+                        class="mt-2 w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3">
+                </div>
+                <div>
+                    <label for="height" class="block text-sm font-semibold text-gray-700">Height [cm]</label>
+                    <input type="number" name="height" id="height" required placeholder="In centimeters"
+                        class="mt-2 w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3">
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="hb1acLevel" class="block text-sm font-semibold text-gray-700">HB1AC Level [%]</label>
+                    <input type="number" name="hb1acLevel" id="hb1acLevel" required placeholder="0.0"
+                        class="mt-2 w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3">
+                </div>
+                <div>
+                    <label for="bloodGlucoseLevel" class="block text-sm font-semibold text-gray-700">Blood Glucose Level [%]</label>
+                    <input type="number" name="bloodGlucoseLevel" id="bloodGlucoseLevel" required placeholder="0.0"
+                        class="mt-2 w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3">
+                </div>
+            </div>
+
+            <!-- Row 3: Radios -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Gender -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Gender</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="gender" value="Male" x-model="gender" class="text-indigo-600">
+                            <span>Male</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="gender" value="Female" x-model="gender" class="text-indigo-600">
+                            <span>Female</span>
+                        </label>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" name="hb1acLevel" id="hb1acLevel" required placeholder="0.0">
-                            <label class="form-check-label" for="hb1acLevel">HB1AC Level [%]</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="bloodGlucoseLevel" name="bloodGlucoseLevel" required placeholder="0.0">
-                            <label class="form-check-label" for="bloodGlucoseLevel">Blood Glucose Level [%]</label>
-                        </div>
+
+                <!-- Hypertension -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Hypertension</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="hypertension" value="1" x-model="hypertension" class="text-indigo-600">
+                            <span>Yes</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="hypertension" value="0" x-model="hypertension" class="text-indigo-600">
+                            <span>No</span>
+                        </label>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" checked>
-                                <label class="form-check-label" for="genderMale"> Male </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
-                                <label class="form-check-label" for="genderFemale"> Female </label>
-                            </div>
-                        </div>
+
+                <!-- Heart Disease -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Heart Disease</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="heartDisease" value="1" x-model="heartDisease" class="text-indigo-600">
+                            <span>Yes</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="heartDisease" value="0" x-model="heartDisease" class="text-indigo-600">
+                            <span>No</span>
+                        </label>
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="rtypes" class="">Hypertension</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="hypertension" id="hyperTensionYes" value="1" checked>
-                                <label class="form-check-label" for="hyperTensionYes"> Yes </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="hypertension" id="hypertensionNo" value="0">
-                                <label class="form-check-label" for="hypertensionNo"> No </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="rtypes" class="">Heart Disease</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="heartDisease" id="YES" value="1" checked>
-                                <label class="form-check-label" for="hyperTensionYes"> Yes </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="heartDisease" id="NO" value="0">
-                                <label class="form-check-label" for="hypertensionNo"> No </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="smoking">Smoking</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="smoking" id="smokingNever" value="never" checked>
-                            <label class="form-check-label" for="smokingNever"> Never </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="smoking" id="smokingCurrent" value="current">
-                            <label class="form-check-label" for="smokingCurrent"> Current </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="smoking" id="smokingFormer" value="former">
-                            <label class="form-check-label" for="smokingFormer"> Former </label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">SUBMIT</button>
                 </div>
-            </form>
-            <div class="alert alert-{{ cls }} mt-4 h2 text-center" role="alert">
+
+                <!-- Smoking -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Smoking</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="smoking" value="never" x-model="smoking" class="text-indigo-600">
+                            <span>Never</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="smoking" value="current" x-model="smoking" class="text-indigo-600">
+                            <span>Current</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="smoking" value="former" x-model="smoking" class="text-indigo-600">
+                            <span>Former</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="text-center">
+                <button type="submit"
+                    class="px-10 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition">
+                    SUBMIT
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Alert -->
+        <div class="mt-6">
+            <div class="text-center text-lg font-bold py-4 px-6 rounded-xl"
+                 :class="{
+                     'bg-green-200 text-green-900': '{{ cls }}' === 'success',
+                     'bg-red-200 text-red-900': '{{ cls }}' === 'danger'
+                 }">
                 {{ result }}
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    </body>
+    </div>
+</body>
 </html>
